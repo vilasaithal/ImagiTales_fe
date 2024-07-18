@@ -262,9 +262,9 @@ export default function Welcome() {
                         </TouchableOpacity>
                       )}
                     </View>
-                    {visibleDescription === item && (
+                    {visibleDescription === item && item && (
                       <Text style={styles.descriptionText}>
-                        {itemDescriptions[item] || "No description available."}
+                        {itemDescriptions[item]}
                       </Text>
                     )}
                   </View>
@@ -363,6 +363,8 @@ const styles = StyleSheet.create({
       android: "EagleLake_400Regular",
       ios: "Eagle Lake", // Use the correct font name for iOS
     }),
+    flexShrink: 1,
+    width: "80%",
   },
   submitButton: {
     backgroundColor: "#000000",
