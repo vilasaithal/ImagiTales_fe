@@ -12,6 +12,7 @@ import { useNavigation } from "@react-navigation/native";
 import backgroundImage from "../assets/testimage.jpg";
 import { Platform } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
+import { itemDescriptions } from "./itemdescriptions";
 
 const categories = [
   {
@@ -121,6 +122,7 @@ const categories = [
 
 export default function Welcome() {
   const navigation = useNavigation();
+  const [visibleDescription, setVisibleDescription] = useState(null);
   const [selections, setSelections] = useState({
     House: null,
     Specialty: null,
@@ -242,9 +244,30 @@ export default function Welcome() {
               <View style={styles.selectionContainer}>
                 <Text style={styles.selectionTitle}>Your Selections:</Text>
                 {Object.entries(selections).map(([category, item]) => (
-                  <Text key={category} style={styles.selectionText}>
-                    {category}: {item || "None"}
-                  </Text>
+                  <View key={category}>
+                    <View style={styles.selectionRow}>
+                      <Text style={styles.selectionText}>
+                        {category}: {item || "None"}
+                      </Text>
+                      {item && (
+                        <TouchableOpacity
+                          style={styles.descriptionButton}
+                          onPress={() =>
+                            setVisibleDescription(
+                              visibleDescription === item ? null : item
+                            )
+                          }
+                        >
+                          <Text style={styles.descriptionButtonText}>?</Text>
+                        </TouchableOpacity>
+                      )}
+                    </View>
+                    {visibleDescription === item && (
+                      <Text style={styles.descriptionText}>
+                        {itemDescriptions[item] || "No description available."}
+                      </Text>
+                    )}
+                  </View>
                 ))}
                 <TouchableOpacity
                   style={styles.submitButton}
@@ -377,5 +400,33 @@ const styles = StyleSheet.create({
     flex: 1,
     resizeMode: "cover", // or 'stretch' or 'contain'
     justifyContent: "center", // Optional: Center content vertically
+  },
+  selectionRow: {
+    flexDirection: "row",
+    alignItems: "center",
+    marginBottom: 10,
+  },
+  descriptionButton: {
+    backgroundColor: "#000000",
+    width: 20,
+    height: 20,
+    borderRadius: 10,
+    justifyContent: "center",
+    alignItems: "center",
+    marginLeft: 10,
+  },
+  descriptionButtonText: {
+    color: "#fff",
+    fontSize: 14,
+    fontWeight: "bold",
+  },
+  descriptionText: {
+    marginTop: 5,
+    marginBottom: 10,
+    fontFamily: Platform.select({
+      android: "EagleLake_400Regular",
+      ios: "Eagle Lake", // Use the correct font name for iOS
+    }),
+    color: "#000000",
   },
 });
