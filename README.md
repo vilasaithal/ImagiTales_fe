@@ -9,3 +9,5 @@ Users pick things like their magical House, Specialty, Spells, and Wand type, in
 This vast repository of tales serves as the foundation for ImagiTales' advanced matching algorithm, using opensearch. ImagiTales makes reading stories more fun by letting users select the parameters of the story-making process.
 
 It's a new way to enjoy stories on your phone, where your choices help create the tale you read.
+
+![alt text](<Gif - Imagitales.gif>)
