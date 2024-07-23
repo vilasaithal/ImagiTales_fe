@@ -160,7 +160,7 @@ export default function Welcome() {
       Spell: selections.Spell,
       WandType: selections.WandType,
     };
-    const url = "http://192.168.0.37:8080/v1/query_by_parameters";
+    const url = "http://********/v1/query_by_parameters";
 
     try {
       console.log("Sending payload:", requestBody);
